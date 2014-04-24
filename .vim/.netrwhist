@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/usr/share/kde4/apps/ksmserver/screenlocker/org.kde.passworddialog'
+let g:netrw_dirhist_2='/home/naiyuan/.vim'
+let g:netrw_dirhist_3='/home/naiyuan/django/django-bootstrap3/bootstrap3/templates/bootstrap3'
+let g:netrw_dirhist_4='/home/naiyuan/django/django-bootstrap3/bootstrap3'
+let g:netrw_dirhist_5='/home/naiyuan/django/django-bootstrap3/bootstrap3/templates/bootstrap3'
+let g:netrw_dirhist_6='/home/naiyuan/django/django-bootstrap3/bootstrap3'
+let g:netrw_dirhist_7='/home/naiyuan/django/snippit/bootstrap3'
+let g:netrw_dirhist_8='/home/naiyuan/django/snippit/django_bootstrap3.egg-info'
