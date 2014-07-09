@@ -108,8 +108,6 @@ eval `dircolors ~/.dircolors.256dark`
 export PS1="\[\e[0;32m\][\[\e[0;32m\]\u\[\e[0;32m\]@\[\e[0;32m\]\h\[\e[0;32m\]]\[\e[0;32m\]: \[\e[0;33m\]\w\[\e[0m\]\n$ "
 
 # Naiyuan added features and commands.
-alias localplus="sh -i firstkey.pem ubuntu@ec2-54-234-21-111.compute-1.amazonaws.com"
-alias fyicorn="ssh -p 2222 fyicorn@fyicornell.com -i ~/.ssh/fyicorn"
 alias ocaml="ledit ocaml"
 
 # Antlr pathing for Compilers.

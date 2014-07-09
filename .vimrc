@@ -1,15 +1,15 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2008 Dec 17
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
+" Include the system settings
+:if filereadable( "/etc/vimrc" )
+   source /etc/vimrc
+:endif
 
-" When started as "evim", evim.vim will already have done these settings.
+" Include Arista-specific settings
+:if filereadable( $VIM . "/vimfiles/arista.vim" )
+   source $VIM/vimfiles/arista.vim
+:endif
+
+" Put your own customizations below
+
 if v:progname =~? "evim"
     finish
 endif
@@ -98,8 +98,8 @@ endif
 
 " Changing the tabsize
 set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=3
+set shiftwidth=3
 
 set background=dark
 set number
@@ -117,8 +117,8 @@ map :Q :q
 map :WQ :wq
 map :Wq :wq
 
-set softtabstop=4
-set shiftwidth=4
+set softtabstop=3
+set shiftwidth=3
 set ignorecase
 set title
 set showmode
@@ -162,8 +162,8 @@ nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
 " Additional plugin keybindings.
-map <F3> :echo "You're editing " bufname("%")<CR>
-"nnoremap <F3> :TlistToggle<CR>
+"map <F3> :echo "You're editing " bufname("%")<CR>
+nnoremap <F3> :TlistToggle<CR>
 nnoremap <F4> :NERDTree<CR>
 nnoremap <F5> :tabedit .<CR>
 
@@ -174,3 +174,6 @@ let g:indentLine_char = '|'
 " Required for the Powerline plugin to show up properly.
 set laststatus=2
 set encoding=utf-8
+
+" Fixing compatibility with tmux using 256 color.
+:set t_ut=
