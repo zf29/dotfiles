@@ -103,7 +103,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 alias tmux='tmux -2'
-eval `dircolors ~/.dircolors.256dark`
 
 export PS1="\[\e[0;32m\][\[\e[0;32m\]\u\[\e[0;32m\]@\[\e[0;32m\]\h\[\e[0;32m\]]\[\e[0;32m\]: \[\e[0;33m\]\w\[\e[0m\]\n$ "
 
