@@ -95,6 +95,9 @@ if !exists(":DiffOrig")
                 \ | wincmd p | diffthis
 endif
 
+" ###
+" ### Begin of actually useful modifications for me.
+" ###
 
 " Changing the tabsize
 set expandtab
@@ -157,15 +160,24 @@ nnoremap <A-0> 10gt
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
 
+" Same as above, but for Mac OSX.
+" http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+nnoremap <silent> [1;9D :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> [1;9C :execute 'silent! tabmove ' . tabpagenr()<CR>
+
 " Previous/next tabs with alt + ,|.
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
 " Additional plugin keybindings.
 "map <F3> :echo "You're editing " bufname("%")<CR>
-nnoremap <F3> :TlistToggle<CR>
+nnoremap <F3> :Tagbar<CR>
 nnoremap <F4> :NERDTree<CR>
 nnoremap <F5> :tabedit .<CR>
+
+" Map jj to the escape key in INSERT MODE. Better and easier to use in the
+" long run.
+imap jj <Esc>
 
 " Tabbing and space indicators.
 let g:indentLine_color_term = 239
@@ -176,4 +188,21 @@ set laststatus=2
 set encoding=utf-8
 
 " Fixing compatibility with tmux using 256 color.
-:set t_ut=
+set t_ut=
+
+"Disable cscope error messages.
+set nocscopeverbose
+
+" Set visual effect to show 80 column limit.
+" http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
+augroup vimrc_autocmds
+  autocmd BufEnter * highlight OverLength ctermbg=darkred guibg=#592929
+  autocmd BufEnter * match OverLength /\%81v.*/
+augroup END
+
+" Better ctags key bindings.
+map <A-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+" Do not auto indent labels in C and C++.
+set cinoptions+=L0
