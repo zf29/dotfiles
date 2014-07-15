@@ -206,3 +206,6 @@ map <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " Do not auto indent labels in C and C++.
 set cinoptions+=L0
+
+" Mapping leader key.
+let mapleader = ","
