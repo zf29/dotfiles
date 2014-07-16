@@ -106,10 +106,6 @@ set shiftwidth=3
 
 set background=dark
 set number
-nnoremap <F7> :set mouse=a <CR>
-nnoremap <F6> :set mouse=r <CR>
-nnoremap <F8> :set invnumber <CR>
-nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 filetype indent plugin on
@@ -170,14 +166,20 @@ nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
 " Additional plugin keybindings.
+nnoremap <F2> :set invpaste paste?<CR>
 "map <F3> :echo "You're editing " bufname("%")<CR>
 nnoremap <F3> :Tagbar<CR>
 nnoremap <F4> :NERDTree<CR>
 nnoremap <F5> :tabedit .<CR>
+nnoremap <F6> :set mouse=r <CR>
+nnoremap <F7> :set mouse=a <CR>
+nnoremap <F8> :set invnumber <CR>
+nnoremap <F9> :MBEToggle<CR>
 
-" Map jj to the escape key in INSERT MODE. Better and easier to use in the
-" long run.
+" Map jj to the escape key in INSERT and VISUAL MODE.
+" Better and easier to use in the long run.
 imap jj <Esc>
+vmap jj <Esc>
 
 " Tabbing and space indicators.
 let g:indentLine_color_term = 239
@@ -197,7 +199,7 @@ set nocscopeverbose
 " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
 augroup vimrc_autocmds
   autocmd BufEnter * highlight OverLength ctermbg=darkred guibg=#592929
-  autocmd BufEnter * match OverLength /\%81v.*/
+  autocmd BufEnter * match OverLength /\%86v.*/
 augroup END
 
 " Better ctags key bindings.
@@ -207,5 +209,23 @@ map <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " Do not auto indent labels in C and C++.
 set cinoptions+=L0
 
-" Mapping leader key.
+" Mapping leader key and functions.
 let mapleader = ","
+
+" Buffer control mapping.
+map . :b 
+
+" Mapping of buffer control keys.
+" http://stackoverflow.com/questions/5559029/quickly-switching-buffers-in-vim-normal-mode
+map <leader>n :bn<cr>
+map <leader>p :bp<cr>
+map <leader>d :bd<cr>
+
+" Mapping of Arista internal code navigation tools.
+map <leader>s :AGid<cr><cr>
+map <leader>w :AGid -D<cr><cr>
+map <leader>a :AGid 
+
+" Make AGid Fold color match that of molokai.
+let AGid_Hi_Fold = "ctermfg=67  ctermbg=16"
+let AGid_Hi_FoldColumn = "ctermfg=67  ctermbg=16"
