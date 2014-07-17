@@ -234,8 +234,8 @@ map . :b
 
 " Mapping of buffer control keys.
 " http://stackoverflow.com/questions/5559029/quickly-switching-buffers-in-vim-normal-mode
-map <leader>m :bn<cr>
-map <leader>n :bp<cr>
+map <leader>n :bn<cr>
+map <leader>p :bp<cr>
 map <leader>d :bd<cr>
 
 " Mapping of Arista internal code navigation tools.
