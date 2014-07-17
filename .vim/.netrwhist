@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/tmp'
-let g:netrw_dirhist_2='/home/naiyzhang/naiyzhang-test-workspace/src/SandCounters'
-let g:netrw_dirhist_3='/home/naiyzhang/naiyzhang-test-workspace/src/Sand/CliPlugin'
-let g:netrw_dirhist_4='/home/naiyzhang/ment1/src/SandCounters/CliPlugin'
-let g:netrw_dirhist_5='/home/naiyzhang/ment1/src/SandCounters'
-let g:netrw_dirhist_6='/home/naiyzhang/demoAgent/src/Demo'
-let g:netrw_dirhist_7='/usr/include'
