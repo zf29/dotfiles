@@ -187,7 +187,24 @@ let g:indentLine_char = '|'
 
 " Required for the Powerline plugin to show up properly.
 set laststatus=2
-set encoding=utf-8
+"set encoding=utf-8
+
+" Bufferline configuration.
+let g:bufferline_echo = 1
+let g:bufferline_show_bufnr = 1
+let g:bufferline_rotate = 1
+
+" Airline configuration.
+let g:airline_theme = "powerlineish"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#tab_min_count = 2
+
+let g:airline#extensions#bufferline#enabled = 0
+let g:airline#extensions#bufferline#overwrite_variables = 0
 
 " Fixing compatibility with tmux using 256 color.
 set t_ut=
@@ -217,8 +234,8 @@ map . :b
 
 " Mapping of buffer control keys.
 " http://stackoverflow.com/questions/5559029/quickly-switching-buffers-in-vim-normal-mode
-map <leader>n :bn<cr>
-map <leader>p :bp<cr>
+map <leader>m :bn<cr>
+map <leader>n :bp<cr>
 map <leader>d :bd<cr>
 
 " Mapping of Arista internal code navigation tools.

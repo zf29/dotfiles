@@ -1,11 +1,14 @@
-require 'rspec/core/rake_task'
+#!/usr/bin/env rake
 
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.pattern = 'spec/multiple_cursors_spec.rb'
+task :default => [:test]
+
+task :ci => [:dump, :test]
+
+task :dump do
+  sh 'vim --version'
 end
 
-RSpec::Core::RakeTask.new(:benchmark) do |t|
-  t.pattern = 'spec/benchmark_spec.rb'
+task :test do
+  sh 'bundle exec vim-flavor test'
 end
 
-task :default => :spec
