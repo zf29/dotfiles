@@ -118,11 +118,12 @@ map :Wq :wq
 
 set softtabstop=3
 set shiftwidth=3
-set ignorecase
+"set ignorecase
 set title
 set showmode
 set ttyfast
 set wildchar=<TAB>
+set wildmode=longest,list,full
 
 colorscheme molokai
 "set guifont=Droid\ Sans\ Mono\ 9
@@ -212,11 +213,18 @@ set t_ut=
 "Disable cscope error messages.
 set nocscopeverbose
 
-" Set visual effect to show 80 column limit.
+" Set visual effect to show 85 column limit.
 " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
+"augroup vimrc_autocmds
+  "autocmd BufEnter * highlight OverLength ctermbg=darkred guibg=#592929
+  "autocmd BufEnter * match OverLength /\%86v.*/
+"augroup END
+
+" Add a colored column at 85.
+" http://scriptogr.am/joshearl/post/adding-a-vertical-ruler-to-vim
 augroup vimrc_autocmds
-  autocmd BufEnter * highlight OverLength ctermbg=darkred guibg=#592929
-  autocmd BufEnter * match OverLength /\%86v.*/
+   set colorcolumn=85
+   highlight ColorColumn guibg=Gray14 ctermbg=235
 augroup END
 
 " Better ctags key bindings.
