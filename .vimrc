@@ -123,7 +123,7 @@ set title
 set showmode
 set ttyfast
 set wildchar=<TAB>
-set wildmode=longest,list,full
+set wildmode=list,longest,full
 
 colorscheme molokai
 "set guifont=Droid\ Sans\ Mono\ 9
