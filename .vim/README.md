@@ -1,96 +1,95 @@
-# vim-expand-region
+### NOTE
+vim-signature has undergone some changes recently, the biggest of which are
+* Maps are specified using a hash. My hope is that this will allow finer control over which maps to enable/disable and eliminate all the default mapping variables
+* Maps are now global by default. It was cumbersome to think of a good way to implement buffer-specific maps and support it. The previous method was clunky at best ( see the number of issues related to maps ) and caused more trouble than they were worth. So I decided to get rid of it.
+* ~~Added option to defer the placement of signs if any other plugin has already placed one.~~ Code was highly inefficient. Removed it temporarily
 
-## About
-[vim-expand-region] is a Vim plugin that allows you to visually select increasingly larger regions of text using the same key combination. It is similar to features from other editors:
+**Q.** So how does this affect me?  
+**A.** Well, if you were using the default maps then I've tried to change things as little as possible (at least in the frontend) and I hope it shouldn't. But if you were using custom maps, then you'll have to set it up again using the new hash method.
 
-- Emac's [expand region](https://github.com/magnars/expand-region.el)
-- IntelliJ's [syntax aware selection](http://www.jetbrains.com/idea/documentation/tips/#tips_code_editing)
-- Eclipse's [select enclosing element](http://stackoverflow.com/questions/4264047/intellij-ctrlw-equivalent-shortcut-in-eclipse)
+**Q.** Are there any changes not related to maps?  
+**A.** Why yes, there is now a new method to jump to marker of any type. This is mapped to `]=` and `[=` by default.
+There is also a new setting to control if the signs should be shown by default at startup. Check out g:SignatureEnabledAtStartup
 
-<p align="center">
-  <img src="https://raw.github.com/terryma/vim-expand-region/master/expand-region.gif" alt="vim-expand-region" />
-</p>
+For those who wish to continue using the older version, I've created a new branch [here](https://github.com/kshenoy/vim-signature/tree/stable_4104e0bb6c)
+
+
+# vim-signature
+vim-signature is a plugin to place, toggle and display marks.
+
+Apart from the above, you can also
+* Navigate forward/backward by position/alphabetical order
+* Displaying multiple marks (upto 2, limited by the signs feature)
+* Placing custom signs !@#$%^&*() as visual markers
+
+
+### Screenshots
+![vim-signature_marks_markers](https://github.com/kshenoy/vim-signature/blob/images/screens/vim-signature_marks_markers.png?raw=true)  
+Displays the marks as signs. Also place visual markers
+
+![Mark jumps](https://github.com/kshenoy/vim-signature/blob/images/screens/vim-signature_mark_jumps.gif?raw=true)  
+Alphabetical mark traversal and more.
+
+More screenshots [here](http://imgur.com/a/3KQyt)
+
+### Vim.org mirror
+If you like the plugin, spread the love and rate at http://www.vim.org/scripts/script.php?script_id=4118
+
+
+## Requirements
+Requires Vim to be compiled with +signs to display marks.
+
 
 ## Installation
-Install using [Pathogen], [Vundle], [Neobundle], or your favorite Vim package manager.
+I recommend using a plugin manager to do the grunt work for you.  
+If for some reason, you do not want to use any of them, then unzip the contents of the .zip file to your ~/.vim directory.
 
-## Quick Start
-Press ```+``` to expand the visual selection and ```_``` to shrink it.
+Once that's done, out of the box, the followings mappings are defined
 
-## Mapping
-Customize the key mapping if you don't like the default.
+````
+  m[a-zA-Z]    : Toggle mark
+  m,           : Place the next available mark
+  m.           : If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
+  m-           : Delete all marks from the current line
+  m<Space>     : Delete all marks from the current buffer
+  ]`           : Jump to next mark
+  [`           : Jump to prev mark
+  ]'           : Jump to start of next line containing a mark
+  ['           : Jump to start of prev line containing a mark
+  `]           : Jump by alphabetical order to next mark
+  `[           : Jump by alphabetical order to prev mark
+  ']           : Jump by alphabetical order to start of next line containing a mark
+  '[           : Jump by alphabetical order to start of prev line containing a mark
+  '?           : Open location list and display local marks
 
-```
-map K <Plug>(expand_region_expand)
-map J <Plug>(expand_region_shrink)
-```
+  m[0-9]       : Toggle the corresponding marker !@#$%^&*()
+  m<S-[0-9]>   : Remove all markers of the same type
+  ]-           : Jump to next line having same marker
+  [-           : Jump to prev line having same marker
+  ]=           : Jump to next line having any marker
+  [=           : Jump to prev line having any marker
+  m<BackSpace> : Remove all markers
+````
 
-## Setting
-### Customize selected regions
-The plugin uses __your own__ text objects to determine the expansion. You can customize the text objects the plugin knows about with ```g:expand_region_text_objects```.
+This will allow the use of default behavior of m to set marks and, if the line
+already contains the mark, it'll be unset.
+The default behavior of `]'`, `['`, ``]` `` and ``[` `` is supported and enhanced by
+wrapping around when beginning or end of file is reached.
 
-```vim
-" Default settings. (NOTE: Remove comments in dictionary before sourcing)
-let g:expand_region_text_objects = {
-      \ 'iw'  :0,
-      \ 'iW'  :0,
-      \ 'i"'  :0,
-      \ 'i''' :0,
-      \ 'i]'  :1, " Support nesting of square brackets
-      \ 'ib'  :1, " Support nesting of parentheses
-      \ 'iB'  :1, " Support nesting of braces
-      \ 'il'  :0, " 'inside line'. Available through https://github.com/kana/vim-textobj-line
-      \ 'ip'  :0,
-      \ 'ie'  :0, " 'entire file'. Available through https://github.com/kana/vim-textobj-entire
-      \ }
-```
+The command `:SignatureToggle` can be used to show/hide the signs.
+Note that this does not delete any of the marks but only hides them.
+This is a buffer-specific command.
 
-You can extend the global default dictionary by calling ```expand_region#custom_text_objects```:
+If for some reason, the marks and their sign displays go out of sync,
+use `:SignatureRefresh` to refresh them.
 
-```vim
-" Extend the global default (NOTE: Remove comments in dictionary before sourcing)
-call expand_region#custom_text_objects({
-      \ "\/\\n\\n\<CR>": 1, " Motions are supported as well. Here's a search motion that finds a blank line
-      \ 'a]' :1, " Support nesting of 'around' brackets
-      \ 'ab' :1, " Support nesting of 'around' parentheses
-      \ 'aB' :1, " Support nesting of 'around' braces
-      \ 'ii' :0, " 'inside indent'. Available through https://github.com/kana/vim-textobj-indent
-      \ 'ai' :0, " 'around indent'. Available through https://github.com/kana/vim-textobj-indent
-      \ })
-```
-
-You can further customize the text objects dictionary on a per filetype basis by defining global variables like ```g:expand_region_text_objects_{ft}```.
-
-```vim
-" Use the following setting for ruby. (NOTE: Remove comments in dictionary  before sourcing)
-let g:expand_region_text_objects_ruby = {
-      \ 'im' :0, " 'inner method'. Available through https://github.com/vim-ruby/vim-ruby
-      \ 'am' :0, " 'around method'. Available through https://github.com/vim-ruby/vim-ruby
-      \ }
-```
-
-Note that this completely replaces the default dictionary. To extend the default on a per filetype basis, you can call ```expand_region#custom_text_objects``` by passing in the filetype in the first argument:
-
-```vim
-" Use the global default + the following for ruby
-call expand_region#custom_text_objects('ruby', {
-      \ 'im' :0,
-      \ 'am' :0,
-      \ })
-```
-
-### Customize selection mode
-By default, after an expansion, the plugin leaves you in visual mode. If your ```selectmode```(h:selectmode)) contains ```cmd```, then the plugin will respect that setting and leave you in select mode. If you don't have ```selectmode``` set, but would like to default the expansion in select mode, you can use the global setting below:
-
-```vim
-let g:expand_region_use_select_mode = 1
-```
-
-[vim-expand-region]:http://github.com/terryma/vim-expand-region
-[Pathogen]:http://github.com/tpope/vim-pathogen
-[Vundle]:http://github.com/gmarik/vundle
-[Neobundle]:http://github.com/Shougo/neobundle.vim
+For more details on customization refer the help
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/terryma/vim-expand-region/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+## Thanks to...
+* Sergey Khorev for [mark-tools](http://www.vim.org/scripts/script.php?script_id=2929)
+* Zak Johnson for [vim-showmarks](https://github.com/zakj/vim-showmarks)
 
+
+## ToDo:
+* Tie the Signature functions to vim commands that affect mark placement

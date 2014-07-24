@@ -174,7 +174,7 @@ nnoremap <F2> :set invpaste paste?<CR>
 nnoremap <F3> :Tagbar<CR>
 nnoremap <F4> :NERDTree<CR>
 nnoremap <F5> :tabedit .<CR>
-nnoremap <F6> :set mouse=r <CR>
+nnoremap <F6> :SignatureList <CR>
 nnoremap <F7> :set mouse=a <CR>
 nnoremap <F8> :set invnumber <CR>
 nnoremap <F9> :MBEToggle<CR>
@@ -267,3 +267,4 @@ let g:solarized_termcolors=256
 
 " Molokai config.
 let g:molokai_original = 1
+
