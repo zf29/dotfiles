@@ -99,25 +99,26 @@ endif
 " ### Begin of actually useful modifications for me.
 " ###
 
-" Changing the tabsize
+" Changing the tabsize.
 set expandtab
 set tabstop=3
 set shiftwidth=3
+set softtabstop=3
+set shiftwidth=3
 
+" Background and other display features.
 set background=dark
 set number
 set pastetoggle=<F2>
 set showmode
 filetype indent plugin on
 
-" Map uppercase W and W to lowercase to avoid annoying typo errors
+" Map uppercase W and W to lowercase to avoid annoying typo errors.
 map :W :w
 map :Q :q
 map :WQ :wq
 map :Wq :wq
 
-set softtabstop=3
-set shiftwidth=3
 "set ignorecase
 set title
 set showmode
@@ -135,6 +136,7 @@ set nowritebackup
 
 set autochdir
 
+" Change the tab labels. Maybe not working right now?
 set guitablabel=%t
 
 " Indent guide plugin configurations.
@@ -254,3 +256,14 @@ map <leader>a :AGid
 " Make AGid Fold color match that of molokai.
 let AGid_Hi_Fold = "ctermfg=67  ctermbg=16"
 let AGid_Hi_FoldColumn = "ctermfg=67  ctermbg=16"
+
+" Tagbar configurations.
+let g:tagbar_left = 1
+
+" Solarized config.
+"let g:solarized_visibility = "high"
+"let g:solarized_contrast = "high"
+let g:solarized_termcolors=256
+
+" Molokai config.
+let g:molokai_original = 1
