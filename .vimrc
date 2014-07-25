@@ -108,7 +108,7 @@ set shiftwidth=3
 
 " Background and other display features.
 set background=dark
-set number
+"set number
 set pastetoggle=<F2>
 set showmode
 filetype indent plugin on
@@ -126,7 +126,6 @@ set ttyfast
 set wildchar=<TAB>
 set wildmode=list,longest,full
 
-colorscheme molokai
 "set guifont=Droid\ Sans\ Mono\ 9
 set guifont=Ubuntu\ Mono\ 11
 set t_Co=256
@@ -253,6 +252,9 @@ map <leader>s :AGid<cr><cr>
 map <leader>w :AGid -D<cr><cr>
 map <leader>a :AGid 
 
+" Mapping for CtrlP omni search tool.
+noremap <C-b> :CtrlPBuffer<cr>
+
 " Make AGid Fold color match that of molokai.
 let AGid_Hi_Fold = "ctermfg=67  ctermbg=16"
 let AGid_Hi_FoldColumn = "ctermfg=67  ctermbg=16"
@@ -263,8 +265,12 @@ let g:tagbar_left = 1
 " Solarized config.
 "let g:solarized_visibility = "high"
 "let g:solarized_contrast = "high"
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 
 " Molokai config.
 let g:molokai_original = 1
+let g:rehash256 = 1
+colorscheme molokai
 
+" Automatically remove trailing white space for various filetypes.
+autocmd BufWritePre *.py :%s/\s\+$//e
