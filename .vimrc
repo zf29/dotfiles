@@ -274,3 +274,6 @@ colorscheme molokai
 
 " Automatically remove trailing white space for various filetypes.
 autocmd BufWritePre *.py :%s/\s\+$//e
+
+" Synastic configurations.
+let g:syntastic_check_on_wq = 0
