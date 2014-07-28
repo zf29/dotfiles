@@ -243,14 +243,14 @@ map . :b
 
 " Mapping of buffer control keys.
 " http://stackoverflow.com/questions/5559029/quickly-switching-buffers-in-vim-normal-mode
-map <leader>n :bn<cr>
-map <leader>p :bp<cr>
-map <leader>d :bd<cr>
+noremap <leader>n :bn<cr>
+noremap <leader>p :bp<cr>
+noremap <leader>d :bd<cr>
 
 " Mapping of Arista internal code navigation tools.
-map <leader>s :AGid<cr><cr>
-map <leader>w :AGid -D<cr><cr>
-map <leader>a :AGid 
+noremap <leader>s :AGid<cr><cr>
+noremap <leader>w :AGid -D<cr><cr>
+noremap <leader>a :AGid6 
 
 " Mapping for CtrlP omni search tool.
 noremap <C-b> :CtrlPBuffer<cr>
@@ -277,3 +277,4 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 
 " Synastic configurations.
 let g:syntastic_check_on_wq = 0
+
