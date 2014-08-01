@@ -250,7 +250,7 @@ noremap <leader>d :bd<cr>
 " Mapping of Arista internal code navigation tools.
 noremap <leader>s :AGid<cr><cr>
 noremap <leader>w :AGid -D<cr><cr>
-noremap <leader>a :AGid6 
+noremap <leader>a :AGid 
 
 " Mapping for CtrlP omni search tool.
 noremap <C-b> :CtrlPBuffer<cr>
@@ -280,6 +280,7 @@ autocmd BufWritePre *.tin :%s/\s\+$//e
 let g:syntastic_mode_map = { "mode": "passive" }
 let g:syntastic_check_on_wq = 0
 noremap <leader>y :SyntasticCheck<cr>
+noremap <leader>u :SyntasticReset<cr>
 
 " Signature and mark configurations.
 noremap <leader>m :marks<cr>
